@@ -12,7 +12,9 @@
   --radius-lg: 16px;
   --radius-md: 12px;
   --radius-sm: 8px;
-  --container-width: 1120px;
+  --container-width: 1160px;
+  --header-height: 72px;
+  --footer-min-height: 220px;
 }
 
 *,
@@ -35,6 +37,20 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Home page scroll snapping */
+
+html.home-snap {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+html.home-snap .hero,
+html.home-snap #home-services,
+html.home-snap .final-block {
+  scroll-snap-align: start;
+  scroll-margin-top: 70px; /* Match your header height */
 }
 
 img {
@@ -192,12 +208,13 @@ h4 {
 }
 
 .hero-content h1 {
-  font-size: clamp(2.1rem, 4vw, 2.7rem);
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
   letter-spacing: -0.03em;
 }
 
 .hero-content p {
   max-width: 34rem;
+  font-size: 1rem;
 }
 
 .hero-actions {
@@ -320,6 +337,28 @@ h4 {
 .section-alt {
   background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
   border-top: 1px solid rgba(148, 163, 184, 0.45);
+}
+
+/* Home page full-height sections */
+
+#home-services {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+}
+
+#home-services > .container {
+  width: 100%;
+}
+
+.final-block {
+  min-height: calc(100vh - var(--header-height) - var(--footer-min-height));
+  display: flex;
+  align-items: center;
+}
+
+.final-block > .container {
+  width: 100%;
 }
 
 .section-header {
@@ -565,7 +604,8 @@ textarea:focus {
   margin-top: auto;
   border-top: 1px solid rgba(148, 163, 184, 0.45);
   background: radial-gradient(circle at top, #020617, #020617);
-  padding: 1.9rem 0 1.4rem;
+  padding: 1.9rem 0 0.9rem;
+  min-height: var(--footer-min-height);
 }
 
 .footer-inner {
