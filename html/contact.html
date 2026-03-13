@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lex &amp; Partners Law Firm | Contact</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">L&amp;P</span>
+          <span class="logo-text">
+            Lex &amp; Partners
+            <span class="logo-subtitle">Attorneys at Law</span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </button>
+
+        <nav class="site-nav" aria-label="Main navigation">
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="lawyers.html">Lawyers</a></li>
+            <li><a href="contact.html" class="active btn btn-small">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <h1>Contact Us</h1>
+          <p>Share your legal question and we will respond within one business day.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container two-column">
+          <div>
+            <h2>Visit or Call</h2>
+            <p>
+              We welcome appointments in person, by video conference, or by phone.
+              Please use the contact form to schedule a consultation.
+            </p>
+            <p>
+              <strong>Office Address</strong><br />
+              1200 Justice Avenue, Suite 400<br />
+              New York, NY 10001
+            </p>
+            <p>
+              <strong>Phone</strong>: (212) 555-0199<br />
+              <strong>Email</strong>: info@lexpartners.com
+            </p>
+          </div>
+
+          <div>
+            <h2>Send a Message</h2>
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name">Full Name<span class="required">*</span></label>
+                <input type="text" id="name" name="name" required />
+                <p class="error-message" data-for="name"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email<span class="required">*</span></label>
+                <input type="email" id="email" name="email" required />
+                <p class="error-message" data-for="email"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" />
+                <p class="error-message" data-for="phone"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject<span class="required">*</span></label>
+                <input type="text" id="subject" name="subject" required />
+                <p class="error-message" data-for="subject"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message<span class="required">*</span></label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <p class="error-message" data-for="message"></p>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-full">Submit</button>
+              </div>
+
+              <p id="form-success" class="form-success" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="logo-mark">L&amp;P</span>
+          <span class="footer-text">Lex &amp; Partners Law Firm</span>
+        </div>
+        <div class="footer-columns">
+          <div>
+            <h4>Office</h4>
+            <p>
+              1200 Justice Avenue<br />
+              Suite 400<br />
+              New York, NY 10001
+            </p>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <p>
+              Phone: (212) 555-0199<br />
+              Email: info@lexpartners.com
+            </p>
+          </div>
+          <div>
+            <h4>Hours</h4>
+            <p>
+              Monday–Friday: 9:00–18:00<br />
+              Emergency support 24/7
+            </p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; <span id="year"></span> Lex &amp; Partners. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+  </body>
+  </html>
