@@ -17,6 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
 
+  const storedMessage = sessionStorage.getItem("formSuccess");
+  if (storedMessage) {
+    const successEl = document.getElementById("form-success");
+    if (successEl) {
+      successEl.textContent = storedMessage;
+    }
+
+    sessionStorage.removeItem("formSuccess");
+
+    setTimeout(() => {
+      if (successEl) {
+        successEl.textContent = "";
+      }
+    }, 5000);
+  }
+
   const fields = {
     name: {
       required: true,
@@ -105,15 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    contactForm.reset();
-    Object.keys(fields).forEach((id) => {
-      const input = contactForm.elements[id];
-      if (input) clearError(input);
-    });
+    sessionStorage.setItem("formSuccess", "Thank you for your message. We will contact you shortly.");
 
-    if (successEl) {
-      successEl.textContent = "Thank you for your message. We will contact you shortly.";
-    }
+    window.location.reload();
   });
 });
-

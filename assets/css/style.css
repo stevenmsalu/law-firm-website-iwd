@@ -48,9 +48,168 @@ html.home-snap {
 
 html.home-snap .hero,
 html.home-snap #home-services,
-html.home-snap .final-block {
+html.home-snap .home-snap-pane--last {
   scroll-snap-align: start;
   scroll-margin-top: 70px; /* Match your header height */
+}
+
+/* Third “screen” includes footer so mandatory snap can rest at doc end (same idea as about) */
+html.home-snap .home-snap-pane--last {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+}
+
+html.home-snap .home-snap-pane--last > .final-block {
+  flex: 1 0 auto;
+  min-height: unset;
+  display: flex;
+  align-items: center;
+}
+
+html.home-snap .home-snap-pane--last .site-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* About page scroll snapping (two panes; sections unchanged inside panes) */
+
+html.about-snap {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+html.about-snap .about-snap-pane--first,
+html.about-snap .about-snap-pane--second {
+  scroll-snap-align: start;
+  scroll-margin-top: 70px;
+  min-height: calc(100vh - var(--header-height));
+}
+
+html.about-snap .about-snap-pane--first {
+  display: flex;
+  flex-direction: column;
+}
+
+html.about-snap .about-snap-pane--first > .page-hero {
+  flex: 0 0 auto;
+}
+
+html.about-snap .about-snap-pane--first > .section {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+html.about-snap .about-snap-pane--first > .section > .container {
+  width: 100%;
+}
+
+html.about-snap .about-snap-pane--second {
+  display: flex;
+  flex-direction: column;
+}
+
+html.about-snap .about-snap-pane--second > .section {
+  flex: 1 0 auto;
+}
+
+html.about-snap .about-snap-pane--second .site-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+html.services-snap {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+html.services-snap .services-snap-pane--first,
+html.services-snap .services-snap-pane--second {
+  scroll-snap-align: start;
+  scroll-margin-top: 70px;
+  min-height: calc(100vh - var(--header-height));
+}
+
+html.services-snap .services-snap-pane--first {
+  display: flex;
+  flex-direction: column;
+}
+
+html.services-snap .services-snap-pane--first > .page-hero {
+  flex: 0 0 auto;
+}
+
+html.services-snap .services-snap-pane--first > .section {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+html.services-snap .services-snap-pane--first > .section > .container {
+  width: 100%;
+}
+
+html.services-snap .services-snap-pane--second {
+  display: flex;
+  flex-direction: column;
+}
+
+html.services-snap .services-snap-pane--second > .section {
+  flex: 1 0 auto;
+}
+
+html.services-snap .services-snap-pane--second .site-footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+html.lawyers-snap {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+html.lawyers-snap .lawyers-snap-pane--first,
+html.lawyers-snap .lawyers-snap-pane--second {
+  scroll-snap-align: start;
+  scroll-margin-top: 70px;
+  min-height: calc(100vh - var(--header-height));
+}
+
+html.lawyers-snap .lawyers-snap-pane--first {
+  display: flex;
+  flex-direction: column;
+}
+
+html.lawyers-snap .lawyers-snap-pane--first > .page-hero {
+  flex: 0 0 auto;
+}
+
+html.lawyers-snap .lawyers-snap-pane--first > .section {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+html.lawyers-snap .lawyers-snap-pane--first > .section > .container {
+  width: 100%;
+}
+
+html.lawyers-snap .lawyers-snap-pane--second {
+  display: flex;
+  flex-direction: column;
+}
+
+html.lawyers-snap .lawyers-snap-pane--second > .section {
+  flex: 1 0 auto;
+}
+
+html.lawyers-snap .lawyers-snap-pane--second .site-footer {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 img {
@@ -512,6 +671,76 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+}
+
+/* Hover transition card */
+.lawyer-card--hover {
+  cursor: pointer;
+}
+
+/* Portrait image - visible by default */
+.lawyer-portrait {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.lawyer-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* Text details - hidden by default */
+.lawyer-details {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+/* On hover: hide portrait, show text */
+.lawyer-card--hover:hover .lawyer-portrait {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.lawyer-card--hover:hover .lawyer-details {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Solid background appears behind text on hover */
+.lawyer-card--hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(circle at 10% 0, #020617, #020617);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.lawyer-card--hover:hover::after {
+  opacity: 1;
+}
+
+/* Keep details above the pseudo-element background */
+.lawyer-card--hover:hover .lawyer-details {
+  position: relative;
+  z-index: 3;
 }
 
 .lawyer-avatar {
