@@ -14,6 +14,100 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ──────────────────────────────────────
+  // Hero Slideshow
+  // ──────────────────────────────────────
+  const slideshowTrack = document.querySelector('.slideshow-track');
+  if (slideshowTrack) {
+    const slides = slideshowTrack.querySelectorAll('.slideshow-slide');
+    const dots = document.querySelectorAll('.slideshow-dot');
+    let currentSlide = 0;
+    let slideInterval;
+    let isTransitioning = false;
+
+    function goToSlide(index) {
+      if (isTransitioning || index === currentSlide) return;
+      isTransitioning = true;
+
+      // Remove active from current
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+
+      // Update current
+      currentSlide = index;
+
+      // Add active to new
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+
+      // Allow transition after animation completes
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800);
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      goToSlide(next);
+    }
+
+    // Auto-advance slides every 5 seconds
+    function startSlideshow() {
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function stopSlideshow() {
+      clearInterval(slideInterval);
+    }
+
+    // Dot click handlers
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-slide'));
+        goToSlide(index);
+        // Reset interval on manual interaction
+        stopSlideshow();
+        startSlideshow();
+      });
+    });
+
+    // Pause on hover
+    slideshowTrack.addEventListener('mouseenter', stopSlideshow);
+    slideshowTrack.addEventListener('mouseleave', startSlideshow);
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slideshowTrack.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopSlideshow();
+    }, { passive: true });
+
+    slideshowTrack.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          // Swipe left - next
+          nextSlide();
+        } else {
+          // Swipe right - previous
+          const prev = (currentSlide - 1 + slides.length) % slides.length;
+          goToSlide(prev);
+        }
+      }
+      startSlideshow();
+    });
+
+    // Start the slideshow
+    startSlideshow();
+  }
+
+  // ──────────────────────────────────────
+  // Contact Form Validation
+  // ──────────────────────────────────────
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
 

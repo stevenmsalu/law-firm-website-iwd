@@ -50,10 +50,9 @@ html.home-snap .hero,
 html.home-snap #home-services,
 html.home-snap .home-snap-pane--last {
   scroll-snap-align: start;
-  scroll-margin-top: 70px; /* Match your header height */
+  scroll-margin-top: 72px;
 }
 
-/* Third “screen” includes footer so mandatory snap can rest at doc end (same idea as about) */
 html.home-snap .home-snap-pane--last {
   min-height: calc(100vh - var(--header-height));
   display: flex;
@@ -72,7 +71,7 @@ html.home-snap .home-snap-pane--last .site-footer {
   flex-shrink: 0;
 }
 
-/* About page scroll snapping (two panes; sections unchanged inside panes) */
+/* About page scroll snapping */
 
 html.about-snap {
   scroll-snap-type: y mandatory;
@@ -82,7 +81,7 @@ html.about-snap {
 html.about-snap .about-snap-pane--first,
 html.about-snap .about-snap-pane--second {
   scroll-snap-align: start;
-  scroll-margin-top: 70px;
+  scroll-margin-top: 72px;
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -120,6 +119,8 @@ html.about-snap .about-snap-pane--second .site-footer {
   flex-shrink: 0;
 }
 
+/* Services page scroll snapping */
+
 html.services-snap {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -128,7 +129,7 @@ html.services-snap {
 html.services-snap .services-snap-pane--first,
 html.services-snap .services-snap-pane--second {
   scroll-snap-align: start;
-  scroll-margin-top: 70px;
+  scroll-margin-top: 72px;
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -166,15 +167,18 @@ html.services-snap .services-snap-pane--second .site-footer {
   flex-shrink: 0;
 }
 
+/* Lawyers page scroll snapping */
+
 html.lawyers-snap {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  --container-width: 1080px;
 }
 
 html.lawyers-snap .lawyers-snap-pane--first,
 html.lawyers-snap .lawyers-snap-pane--second {
   scroll-snap-align: start;
-  scroll-margin-top: 70px;
+  scroll-margin-top: 72px;
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -351,7 +355,7 @@ h4 {
 /* HERO */
 
 .hero {
-  padding: 3.5rem 0 3.8rem;
+  padding: 0.1rem 0 3.8rem;
   background:
     radial-gradient(circle at top left, rgba(29, 78, 216, 0.4), transparent 55%),
     radial-gradient(circle at 80% 0, rgba(212, 175, 55, 0.4), transparent 60%),
@@ -444,6 +448,146 @@ h4 {
   background: var(--color-accent);
 }
 
+/* HERO SLIDESHOW */
+
+.hero-slideshow {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.slideshow-track {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  min-height: 400px;
+}
+
+.slideshow-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 1;
+}
+
+.slideshow-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.slideshow-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.85) 0%,
+    rgba(2, 6, 23, 0.3) 40%,
+    rgba(2, 6, 23, 0.1) 70%,
+    transparent 100%
+  );
+}
+
+.hero-card--floating {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: radial-gradient(circle at 10% 0, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 1.5rem 1.4rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-card--floating:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+}
+
+.hero-card--floating h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card--floating p {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-card--floating .hero-list {
+  margin-bottom: 1.2rem;
+}
+
+.hero-card--floating .hero-list li {
+  font-size: 0.85rem;
+}
+
+.slideshow-dots {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.slideshow-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.slideshow-dot:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.2);
+}
+
+.slideshow-dot.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.slideshow-dot.active::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-accent);
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+}
+
 /* BUTTONS */
 
 .btn {
@@ -490,15 +634,13 @@ h4 {
 /* SECTIONS & LAYOUT */
 
 .section {
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 
 .section-alt {
   background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
   border-top: 1px solid rgba(148, 163, 184, 0.45);
 }
-
-/* Home page full-height sections */
 
 #home-services {
   min-height: calc(100vh - var(--header-height));
@@ -522,7 +664,7 @@ h4 {
 
 .section-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 .section-header.align-left {
@@ -545,7 +687,7 @@ h4 {
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .card-grid.three {
@@ -556,7 +698,7 @@ h4 {
   background: radial-gradient(circle at 10% 0, #020617, #020617);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(148, 163, 184, 0.4);
-  padding: 1.4rem 1.3rem 1.3rem;
+  padding: 1rem;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -650,7 +792,7 @@ h4 {
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6);
 }
 
-/* PAGE HERO (INNER PAGES) */
+/* PAGE HERO */
 
 .page-hero {
   padding: 2.4rem 0 2.3rem;
@@ -670,18 +812,16 @@ h4 {
 .lawyer-card {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
   position: relative;
-  min-height: 380px;
+  min-height: 320px;
   overflow: hidden;
 }
 
-/* Hover transition card */
 .lawyer-card--hover {
   cursor: pointer;
 }
 
-/* Portrait image - visible by default */
 .lawyer-portrait {
   position: absolute;
   inset: 0;
@@ -696,7 +836,6 @@ h4 {
   border-radius: var(--radius-lg);
 }
 
-/* Text details - hidden by default */
 .lawyer-details {
   position: relative;
   z-index: 2;
@@ -709,7 +848,6 @@ h4 {
   pointer-events: none;
 }
 
-/* On hover: hide portrait, show text */
 .lawyer-card--hover:hover .lawyer-portrait {
   opacity: 0;
   transform: scale(1.05);
@@ -721,7 +859,6 @@ h4 {
   pointer-events: auto;
 }
 
-/* Solid background appears behind text on hover */
 .lawyer-card--hover::after {
   content: "";
   position: absolute;
@@ -737,7 +874,6 @@ h4 {
   opacity: 1;
 }
 
-/* Keep details above the pseudo-element background */
 .lawyer-card--hover:hover .lawyer-details {
   position: relative;
   z-index: 3;
@@ -896,6 +1032,26 @@ textarea:focus {
   .two-column {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .hero-slideshow {
+    max-width: 100%;
+    margin: 1.5rem auto 0;
+  }
+
+  .slideshow-track {
+    aspect-ratio: 16 / 9;
+    min-height: 300px;
+  }
+
+  .hero-card--floating {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    margin-top: -3rem;
+    border-radius: 16px;
+    z-index: 5;
+  }
 }
 
 @media (max-width: 768px) {
@@ -962,5 +1118,29 @@ textarea:focus {
 
   .hero-meta > div {
     flex: 1 1 7rem;
+  }
+
+  .slideshow-track {
+    aspect-ratio: 4 / 3;
+    min-height: 250px;
+  }
+
+  .hero-card--floating {
+    padding: 1.2rem 1rem;
+    margin-top: -2rem;
+  }
+
+  .hero-card--floating h2 {
+    font-size: 1.05rem;
+  }
+
+  .slideshow-dots {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .slideshow-dot {
+    width: 8px;
+    height: 8px;
   }
 }
