@@ -1,3 +1,7 @@
+// ──────────────────────────────────────
+// Initialization
+// Updates footer year and controls the mobile menu toggle
+// ──────────────────────────────────────
 document.addEventListener("DOMContentLoaded", function () {
   const navToggle = document.querySelector(".nav-toggle");
   const siteNav = document.querySelector(".site-nav");
@@ -16,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ──────────────────────────────────────
   // Hero Slideshow
+  // Cycles through hero images automatically with dot controls, hover pause, and swipe support
   // ──────────────────────────────────────
   const slideshowTrack = document.querySelector('.slideshow-track');
   if (slideshowTrack) {
@@ -29,18 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isTransitioning || index === currentSlide) return;
       isTransitioning = true;
 
-      // Remove active from current
       slides[currentSlide].classList.remove('active');
       dots[currentSlide].classList.remove('active');
 
-      // Update current
       currentSlide = index;
 
-      // Add active to new
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
 
-      // Allow transition after animation completes
       setTimeout(() => {
         isTransitioning = false;
       }, 800);
@@ -51,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
       goToSlide(next);
     }
 
-    // Auto-advance slides every 5 seconds
     function startSlideshow() {
       slideInterval = setInterval(nextSlide, 5000);
     }
@@ -60,22 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
       clearInterval(slideInterval);
     }
 
-    // Dot click handlers
     dots.forEach(dot => {
       dot.addEventListener('click', () => {
         const index = parseInt(dot.getAttribute('data-slide'));
         goToSlide(index);
-        // Reset interval on manual interaction
         stopSlideshow();
         startSlideshow();
       });
     });
 
-    // Pause on hover
     slideshowTrack.addEventListener('mouseenter', stopSlideshow);
     slideshowTrack.addEventListener('mouseleave', startSlideshow);
 
-    // Touch swipe support
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -90,10 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (Math.abs(diff) > 50) {
         if (diff > 0) {
-          // Swipe left - next
           nextSlide();
         } else {
-          // Swipe right - previous
           const prev = (currentSlide - 1 + slides.length) % slides.length;
           goToSlide(prev);
         }
@@ -101,12 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
       startSlideshow();
     });
 
-    // Start the slideshow
     startSlideshow();
   }
 
   // ──────────────────────────────────────
   // Contact Form Validation
+  // Checks form fields on submit and shows error messages if fields are empty or invalid
   // ──────────────────────────────────────
   const contactForm = document.getElementById("contact-form");
   if (!contactForm) return;
