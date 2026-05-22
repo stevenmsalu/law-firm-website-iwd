@@ -167,6 +167,14 @@ html.services-snap .services-snap-pane--second .site-footer {
   flex-shrink: 0;
 }
 
+/* Anchor targets — prevent overscroll past sticky header */
+
+#corporate,
+#litigation,
+#family {
+  scroll-margin-top: 90px;
+}
+
 /* Lawyers page scroll snapping */
 
 html.lawyers-snap {
