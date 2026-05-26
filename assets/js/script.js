@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
   // ──────────────────────────────────────
@@ -16,10 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ──────────────────────────────────────
   // 2. Footer Year Update
   // ──────────────────────────────────────
-  const yearSpan = document.getElementById("year");
+  const footerYear = document.getElementById("year");
 
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear().toString();
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear().toString();
   }
 
   // ──────────────────────────────────────
@@ -61,34 +60,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const emailInput = document.getElementById("email");
     const subjectInput = document.getElementById("subject");
     const messageInput = document.getElementById("message");
-    const successEl = document.getElementById("form-success");
+    const successMessage = document.getElementById("form-success");
+
+    const nameError = document.querySelector('[data-for="name"]');
+    const emailError = document.querySelector('[data-for="email"]');
+    const subjectError = document.querySelector('[data-for="subject"]');
+    const messageError = document.querySelector('[data-for="message"]');
 
     // Clear all previous errors
     function clearErrors() {
 
-      document.querySelectorAll(".error-message").forEach(function (msg) {
-        msg.textContent = "";
+      document.querySelectorAll(".error-message").forEach(function (message) {
+        message.textContent = "";
       });
 
       document.querySelectorAll("input, textarea").forEach(function (field) {
         field.classList.remove("error");
       });
 
-      successEl.textContent = "";
-    }
-
-    // Show error message
-    function showError(input, message) {
-
-      input.classList.add("error");
-
-      const errorEl = document.querySelector(
-        `.error-message[data-for="${input.id}"]`
-      );
-
-      if (errorEl) {
-        errorEl.textContent = message;
-      }
+      successMessage.textContent = "";
     }
 
     // Form submit event
@@ -103,7 +93,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // Name validation
       if (nameInput.value.trim() === "") {
 
-        showError(nameInput, "Please enter your name.");
+        nameInput.classList.add("error");
+
+        nameError.textContent = "Please enter your name.";
 
         isValid = false;
       }
@@ -114,7 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
         !emailInput.value.includes("@")
       ) {
 
-        showError(emailInput, "Please enter a valid email.");
+        emailInput.classList.add("error");
+
+        emailError.textContent = "Please enter a valid email.";
 
         isValid = false;
       }
@@ -122,7 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // Subject validation
       if (subjectInput.value.trim() === "") {
 
-        showError(subjectInput, "Please enter a subject.");
+        subjectInput.classList.add("error");
+
+        subjectError.textContent = "Please enter a subject.";
 
         isValid = false;
       }
@@ -130,7 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // Message validation
       if (messageInput.value.trim() === "") {
 
-        showError(messageInput, "Please enter a message.");
+        messageInput.classList.add("error");
+
+        messageError.textContent = "Please enter a message.";
 
         isValid = false;
       }
@@ -138,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Successful form submission
       if (isValid) {
 
-        successEl.textContent =
+        successMessage.textContent =
           "Thank you for your message. We will get back to you soon!";
 
         contactForm.reset();
