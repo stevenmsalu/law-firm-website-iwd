@@ -544,58 +544,6 @@ h4 {
   font-size: 0.85rem;
 }
 
-.slideshow-dots {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.slideshow-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.slideshow-dot:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.2);
-}
-
-.slideshow-dot.active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  transform: scale(1.1);
-}
-
-.slideshow-dot.active::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 999px;
-  background: var(--color-accent);
-  animation: dotPulse 1.4s ease-in-out infinite;
-}
-
-@keyframes dotPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.3);
-  }
-}
-
 /* BUTTONS */
 
 .btn {
@@ -1139,15 +1087,5 @@ textarea:focus {
 
   .hero-card--floating h2 {
     font-size: 1.05rem;
-  }
-
-  .slideshow-dots {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
-
-  .slideshow-dot {
-    width: 8px;
-    height: 8px;
   }
 }
