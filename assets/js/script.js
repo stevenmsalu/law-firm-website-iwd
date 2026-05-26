@@ -141,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
         successEl.textContent =
           "Thank you for your message. We will get back to you soon!";
 
-        // Clear form
         contactForm.reset();
 
         // Refresh page after 3 seconds
