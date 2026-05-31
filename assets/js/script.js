@@ -70,11 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Clear all previous errors
     function clearErrors() {
 
-      document.querySelectorAll(".error-message").forEach(function (message) {
+      contactForm.querySelectorAll(".error-message").forEach(function (message) {
         message.textContent = "";
       });
 
-      document.querySelectorAll("input, textarea").forEach(function (field) {
+      contactForm.querySelectorAll("input, textarea").forEach(function (field) {
         field.classList.remove("error");
       });
 
